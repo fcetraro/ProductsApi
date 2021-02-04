@@ -1,10 +1,12 @@
 package com.ml.ProductsApi.service;
 
-import com.ml.ProductsApi.model.read.ArticlesDTO;
+import com.ml.ProductsApi.model.ArticleDTO;
 import com.ml.ProductsApi.model.request.FilterDTO;
+import com.ml.ProductsApi.model.response.ArticlesResponseDTO;
 
 import java.util.List;
 
 public interface IProductService {
-    List<ArticlesDTO> getArticles(FilterDTO filters, String sort);
+    List<ArticleDTO> getArticles(FilterDTO filters, String sort);
+    ArticlesResponseDTO getArticlesById(Integer[] ids);
 }

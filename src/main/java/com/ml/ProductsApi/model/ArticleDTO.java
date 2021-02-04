@@ -1,9 +1,22 @@
-package com.ml.ProductsApi.model.read;
+package com.ml.ProductsApi.model;
 
-public class ArticlesDTO {
+import com.ml.ProductsApi.model.read.ArticleFromJsonDTO;
+
+public class ArticleDTO {
     String name, category, brand;
-    int price, quantity, prestige;
+    int price, quantity, prestige, id;
     boolean freeShipping;
+
+    public ArticleDTO(int id, ArticleFromJsonDTO articles) {
+        this.name = articles.getName();
+        this.category = articles.getCategory();
+        this.brand = articles.getBrand();
+        this.price = articles.getPrice();
+        this.quantity = articles.getQuantity();
+        this.prestige = articles.getPrestige();
+        this.id = id;
+        this.freeShipping = articles.isFreeShipping();
+    }
 
     public String getName() {
         return name;
@@ -51,6 +64,14 @@ public class ArticlesDTO {
 
     public void setPrestige(int prestige) {
         this.prestige = prestige;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean isFreeShipping() {

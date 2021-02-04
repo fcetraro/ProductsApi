@@ -1,10 +1,8 @@
 package com.ml.ProductsApi.filters;
 
 import com.ml.ProductsApi.filters.concret.*;
-import com.ml.ProductsApi.model.read.ArticlesDTO;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 public class FMFilter {
     public static List<Filter> getFilters(Map<String, String> mapFilters){

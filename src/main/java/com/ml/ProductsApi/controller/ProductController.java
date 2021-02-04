@@ -1,10 +1,10 @@
 package com.ml.ProductsApi.controller;
 
-import com.ml.ProductsApi.model.read.ArticlesDTO;
+import com.ml.ProductsApi.model.ArticleDTO;
 import com.ml.ProductsApi.model.request.FilterDTO;
+import com.ml.ProductsApi.model.response.ArticlesResponseDTO;
 import com.ml.ProductsApi.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class ProductController {
     @Autowired
     private IProductService service;
     @GetMapping("/articles")
-    public List<ArticlesDTO> getArticles(@RequestParam(required = false) String brand
+    public List<ArticleDTO> getArticles(@RequestParam(required = false) String brand
             , @RequestParam(required = false) String category
             , @RequestParam(required = false) String prestige
             , @RequestParam(required = false) String price
@@ -25,5 +25,9 @@ public class ProductController {
             , @RequestParam(required = false) String order){
         FilterDTO newFilters = new FilterDTO(brand,category,prestige,price,quantity,name,sendFree);
         return service.getArticles(newFilters, order);
+    }
+    @GetMapping("/articles/search")
+    public ArticlesResponseDTO getArticlesById(@RequestParam Integer id[]) {
+        return service.getArticlesById(id);
     }
 }

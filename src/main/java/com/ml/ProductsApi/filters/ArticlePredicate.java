@@ -1,6 +1,6 @@
 package com.ml.ProductsApi.filters;
 
-import com.ml.ProductsApi.model.read.ArticlesDTO;
+import com.ml.ProductsApi.model.ArticleDTO;
 import com.ml.ProductsApi.model.request.FilterDTO;
 
 import java.util.*;
@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 import static com.ml.ProductsApi.filters.FMFilter.getFilters;
 
 public class ArticlePredicate {
-    public Predicate<ArticlesDTO> getCombinedPredicateFromDTO(FilterDTO filters){
+    public Predicate<ArticleDTO> getCombinedPredicateFromDTO(FilterDTO filters){
         Map<String, String> filterMap = generateMap(filters);
         return getCombinedPredicate(filterMap);
     }
@@ -41,13 +41,13 @@ public class ArticlePredicate {
         }
         return filtersMap;
     }
-    private Predicate<ArticlesDTO> getCombinedPredicate(Map<String, String> mapFilters){
+    private Predicate<ArticleDTO> getCombinedPredicate(Map<String, String> mapFilters){
         List<Filter> allFilters = getFilters(mapFilters);
-        List<Predicate<ArticlesDTO>> allPredicates = new ArrayList<>();
+        List<Predicate<ArticleDTO>> allPredicates = new ArrayList<>();
         for (Filter filter:allFilters) {
             allPredicates.add(filter.getPredicate());
         }
-        Predicate<ArticlesDTO> compositePredicate =
+        Predicate<ArticleDTO> compositePredicate =
                 allPredicates.stream()
                         .reduce(w -> true, Predicate::and);
         return compositePredicate;
