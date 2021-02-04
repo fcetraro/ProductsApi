@@ -21,8 +21,9 @@ public class ProductController {
             , @RequestParam(required = false) String price
             , @RequestParam(required = false) String quantity
             , @RequestParam(required = false) String name
-            , @RequestParam(required = false) String sendFree){
+            , @RequestParam(required = false) String sendFree
+            , @RequestParam(required = false) String order){
         FilterDTO newFilters = new FilterDTO(brand,category,prestige,price,quantity,name,sendFree);
-        return service.getArticles(newFilters);
+        return service.getArticles(newFilters, order);
     }
 }
