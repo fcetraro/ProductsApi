@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -17,16 +18,9 @@ public class ProductController {
     @Autowired
     private IProductService service;
     @GetMapping("/articles")
-    public List<ArticleDTO> getArticles(@RequestParam(required = false) String brand
-            , @RequestParam(required = false) String category
-            , @RequestParam(required = false) String prestige
-            , @RequestParam(required = false) String price
-            , @RequestParam(required = false) String quantity
-            , @RequestParam(required = false) String name
-            , @RequestParam(required = false) String sendFree
-            , @RequestParam(required = false) String order){
-        FilterDTO newFilters = new FilterDTO(brand,category,prestige,price,quantity,name,sendFree);
-        return service.getArticles(newFilters, order);
+    public List<ArticleDTO> getArticles(@RequestParam(required = false) Map<String, String> queryMap,
+                                        @RequestParam(required = false) String order){
+        return service.getArticles(queryMap, order);
     }
     @GetMapping("/articles/search")
     public ArticlesResponseDTO getArticlesById(@RequestParam Integer id[]) {

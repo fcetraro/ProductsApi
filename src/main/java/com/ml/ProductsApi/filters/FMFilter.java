@@ -1,5 +1,6 @@
 package com.ml.ProductsApi.filters;
 
+import com.ml.ProductsApi.exception.concreteExceptions.FilterNotFoundException;
 import com.ml.ProductsApi.filters.concret.*;
 
 import java.util.*;
@@ -26,7 +27,7 @@ public class FMFilter {
                 return concretFilter;
             }
         }
-        return null;
+        throw new FilterNotFoundException("Filtro [" + filter + "] no reconocido.", new Exception());
     }
 
     private static List<Filter> getAllFilters(){
@@ -38,6 +39,7 @@ public class FMFilter {
         allFilters.add(new ExactQuantity());
         allFilters.add(new Name());
         allFilters.add(new SendFree());
+        allFilters.add(new Order());
         return allFilters;
     }
 }

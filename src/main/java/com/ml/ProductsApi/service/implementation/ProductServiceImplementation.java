@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductServiceImplementation implements IProductService {
@@ -20,7 +21,7 @@ public class ProductServiceImplementation implements IProductService {
     private IProductDAO products;
     private ISorter sorter = SorterFactory.getInstance();
     @Override
-    public List<ArticleDTO> getArticles(FilterDTO filters, String sort) {
+    public List<ArticleDTO> getArticles(Map<String, String> filters, String sort) {
         List<ArticleDTO> articles = products.getArticles(filters);
         if(sort!=null){
             if(SorterFactory.getComparables().containsKey(sort)) {

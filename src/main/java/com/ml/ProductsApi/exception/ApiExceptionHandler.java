@@ -1,6 +1,7 @@
 package com.ml.ProductsApi.exception;
 
 import com.ml.ProductsApi.exception.concreteExceptions.ApiException;
+import com.ml.ProductsApi.exception.concreteExceptions.FilterNotFoundException;
 import com.ml.ProductsApi.exception.concreteExceptions.NoStockException;
 import com.ml.ProductsApi.exception.concreteExceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,12 @@ public class ApiExceptionHandler {
     }
     @ExceptionHandler(value = {ProductNotFoundException.class})
     public ResponseEntity<Object> handleNotFoundRequestException(ProductNotFoundException e){
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ApiException exception = new ApiException(e.getMessage(), e, status, ZonedDateTime.now());
+        return new ResponseEntity<>(exception, status);
+    }
+    @ExceptionHandler(value = {FilterNotFoundException.class})
+    public ResponseEntity<Object> handleFilterNotFoundException(FilterNotFoundException e){
         HttpStatus status = HttpStatus.BAD_REQUEST;
         ApiException exception = new ApiException(e.getMessage(), e, status, ZonedDateTime.now());
         return new ResponseEntity<>(exception, status);

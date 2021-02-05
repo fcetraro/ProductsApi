@@ -6,9 +6,10 @@ import com.ml.ProductsApi.model.request.QuantityArticleDTO;
 import com.ml.ProductsApi.model.response.ArticlesResponseDTO;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IProductService {
-    List<ArticleDTO> getArticles(FilterDTO filters, String sort);
+    List<ArticleDTO> getArticles(Map<String, String> filters, String sort);
     ArticlesResponseDTO getArticlesById(Integer[] ids);
     ArticlesResponseDTO buyArticles(List<QuantityArticleDTO> articles);
 }

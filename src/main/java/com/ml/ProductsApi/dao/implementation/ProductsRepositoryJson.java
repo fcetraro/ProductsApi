@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import static java.util.stream.Collectors.toList;
@@ -56,7 +57,7 @@ public class ProductsRepositoryJson implements IProductDAO {
         }
     }
     @Override
-    public List<ArticleDTO> getArticles(FilterDTO filter) {
+    public List<ArticleDTO> getArticles(Map<String, String> filter) {
         loadInitialArticles();
         ArticlePredicate filters = new ArticlePredicate();
         Predicate<ArticleDTO> predicate = filters.getCombinedPredicateFromDTO(filter);
