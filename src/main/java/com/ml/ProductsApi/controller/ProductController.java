@@ -1,7 +1,9 @@
 package com.ml.ProductsApi.controller;
 
 import com.ml.ProductsApi.model.ArticleDTO;
+import com.ml.ProductsApi.model.request.BuyedArticlesDTO;
 import com.ml.ProductsApi.model.request.FilterDTO;
+import com.ml.ProductsApi.model.request.QuantityArticleDTO;
 import com.ml.ProductsApi.model.response.ArticlesResponseDTO;
 import com.ml.ProductsApi.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +31,9 @@ public class ProductController {
     @GetMapping("/articles/search")
     public ArticlesResponseDTO getArticlesById(@RequestParam Integer id[]) {
         return service.getArticlesById(id);
+    }
+    @PutMapping("/articles/buy")
+    public ArticlesResponseDTO buyArticles(@RequestBody BuyedArticlesDTO articlesBuyed) {
+        return service.buyArticles(articlesBuyed.getArticles());
     }
 }

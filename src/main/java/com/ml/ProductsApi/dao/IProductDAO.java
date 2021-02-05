@@ -8,4 +8,5 @@ import java.util.List;
 public interface IProductDAO {
     List<ArticleDTO> getArticles(FilterDTO filter);
     ArticleDTO getArticleById(Integer id);
+    ArticleDTO modify(ArticleDTO modifiedArticle);
 }

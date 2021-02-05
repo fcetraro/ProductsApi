@@ -3,6 +3,7 @@ package com.ml.ProductsApi.dao.implementation;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ml.ProductsApi.dao.IProductDAO;
+import com.ml.ProductsApi.exception.concreteExceptions.ProductNotFoundException;
 import com.ml.ProductsApi.filters.ArticlePredicate;
 import com.ml.ProductsApi.model.ArticleDTO;
 import com.ml.ProductsApi.model.read.ArticleFromJsonDTO;
@@ -65,6 +66,17 @@ public class ProductsRepositoryJson implements IProductDAO {
     @Override
     public ArticleDTO getArticleById(Integer id) {
         loadInitialArticles();
-        return articles.get(id);
+        try{
+            return articles.get(id);
+        } catch (Exception e){
+            throw new ProductNotFoundException("No se encontro producto ["+id + "]",e);
+        }
+    }
+
+    @Override
+    public ArticleDTO modify(ArticleDTO modifiedArticle) {
+        loadInitialArticles();
+        articles.set(modifiedArticle.getId(), modifiedArticle);
+        return articles.get(modifiedArticle.getId());
     }
 }
