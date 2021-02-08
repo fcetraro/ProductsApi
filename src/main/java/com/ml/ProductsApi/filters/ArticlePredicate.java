@@ -10,6 +10,9 @@ import static com.ml.ProductsApi.filters.FMFilter.getFilters;
 
 public class ArticlePredicate {
     public Predicate<ArticleDTO> getCombinedPredicateFromDTO(Map<String, String> filters){
+        if(filters.containsKey("order")){
+            filters.remove("order");
+        }
         return getCombinedPredicate(filters);
     }
     private Predicate<ArticleDTO> getCombinedPredicate(Map<String, String> mapFilters){

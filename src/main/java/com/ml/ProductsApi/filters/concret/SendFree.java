@@ -8,10 +8,10 @@ import java.util.function.Predicate;
 import static java.lang.Integer.parseInt;
 
 public class SendFree extends Filter {
-
+    boolean freeShipping;
     @Override
     public Predicate<ArticleDTO> getPredicate() {
-        return w -> w.isFreeShipping();
+        return w -> w.isFreeShipping() == freeShipping;
     }
 
     @Override
@@ -19,5 +19,7 @@ public class SendFree extends Filter {
         return "sendFree";
     }
     @Override
-    public void setValue(String value) {}
+    public void setValue(String value) {
+        freeShipping = Boolean.parseBoolean(value);
+    }
 }

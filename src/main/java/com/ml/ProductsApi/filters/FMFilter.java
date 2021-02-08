@@ -1,6 +1,7 @@
 package com.ml.ProductsApi.filters;
 
 import com.ml.ProductsApi.exception.concreteExceptions.FilterNotFoundException;
+import com.ml.ProductsApi.exception.concreteExceptions.WrongCastFilterException;
 import com.ml.ProductsApi.filters.concret.*;
 
 import java.util.*;
@@ -23,8 +24,13 @@ public class FMFilter {
     private static Filter getConcretFilter(String filter, String value) {
         for (Filter concretFilter:getAllFilters()) {
             if(concretFilter.matchFilterName(filter)) {
-                concretFilter.setValue(value);
-                return concretFilter;
+                try {
+                    concretFilter.setValue(value);
+                    return concretFilter;
+                } catch (Exception e){
+                    String message = "Tipo ingresado para el filtro "+concretFilter.getFilterName() +" no es valido.";
+                    throw new WrongCastFilterException(message, e);
+                }
             }
         }
         throw new FilterNotFoundException("Filtro [" + filter + "] no reconocido.", new Exception());
@@ -39,7 +45,6 @@ public class FMFilter {
         allFilters.add(new ExactQuantity());
         allFilters.add(new Name());
         allFilters.add(new SendFree());
-        allFilters.add(new Order());
         return allFilters;
     }
 }

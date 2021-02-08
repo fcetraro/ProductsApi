@@ -70,7 +70,7 @@ public class ProductsRepositoryJson implements IProductDAO {
         try{
             return articles.get(id);
         } catch (Exception e){
-            throw new ProductNotFoundException("No se encontro producto ["+id + "]",e);
+            throw new ProductNotFoundException("No se encontro producto [" + id + "]",e);
         }
     }
 
