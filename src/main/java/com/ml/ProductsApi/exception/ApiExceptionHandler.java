@@ -28,4 +28,10 @@ public class ApiExceptionHandler {
         ApiException exception = new ApiException(e.getMessage(), e, status, ZonedDateTime.now());
         return new ResponseEntity<>(exception, status);
     }
+    @ExceptionHandler(value = {FilterNotFoundException.class})
+    public ResponseEntity<Object> handleFilterNotFoundException(FilterNotFoundException e){
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        ApiException exception = new ApiException(e.getMessage(), e, status, ZonedDateTime.now());
+        return new ResponseEntity<>(exception, status);
+    }
 }

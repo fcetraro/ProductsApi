@@ -7,6 +7,9 @@ public class ArticleDTO {
     int price, quantity, prestige, id;
     boolean freeShipping;
 
+    public ArticleDTO() {
+    }
+
     public ArticleDTO(int id, ArticleFromJsonDTO articles) {
         this.name = articles.getName();
         this.category = articles.getCategory();

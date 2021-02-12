@@ -1,7 +1,8 @@
 package com.ml.ProductsApi.model.request;
 
 public class QuantityArticleDTO {
-    int id, quantityBuyed;
+    int id;
+    int quantityBought;
 
     public int getId() {
         return id;
@@ -11,11 +12,11 @@ public class QuantityArticleDTO {
         this.id = id;
     }
 
-    public int getQuantityBuyed() {
-        return quantityBuyed;
+    public int getQuantityBought() {
+        return quantityBought;
     }
 
-    public void setQuantityBuyed(int quantityBuyed) {
-        this.quantityBuyed = quantityBuyed;
+    public void setQuantityBought(int quantityBought) {
+        this.quantityBought = quantityBought;
     }
 }

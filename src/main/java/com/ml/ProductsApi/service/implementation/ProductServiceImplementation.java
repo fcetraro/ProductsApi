@@ -3,7 +3,6 @@ package com.ml.ProductsApi.service.implementation;
 import com.ml.ProductsApi.dao.IProductDAO;
 import com.ml.ProductsApi.exception.concreteExceptions.NoStockException;
 import com.ml.ProductsApi.model.ArticleDTO;
-import com.ml.ProductsApi.model.request.FilterDTO;
 import com.ml.ProductsApi.model.request.QuantityArticleDTO;
 import com.ml.ProductsApi.model.response.ArticlesResponseDTO;
 import com.ml.ProductsApi.service.IProductService;
@@ -20,6 +19,11 @@ public class ProductServiceImplementation implements IProductService {
     @Autowired
     private IProductDAO products;
     private ISorter sorter = SorterFactory.getInstance();
+    @Autowired
+    public ProductServiceImplementation(IProductDAO products) {
+        this.products = products;
+    }
+
     @Override
     public List<ArticleDTO> getArticles(Map<String, String> filters, String sort) {
         List<ArticleDTO> articles = products.getArticles(filters);
@@ -47,12 +51,14 @@ public class ProductServiceImplementation implements IProductService {
         List<ArticleDTO> modifiedArticles = new ArrayList<>();
         for (QuantityArticleDTO article:articles) {
             ArticleDTO fullArticle = products.getArticleById(article.getId());
-            fullArticle.setQuantity(fullArticle.getQuantity()-article.getQuantityBuyed());
-            if(fullArticle.getQuantity()<0){
+            int newQuantity = fullArticle.getQuantity()-article.getQuantityBought();
+            if(newQuantity<0){
                 throw new NoStockException("El producto " + fullArticle.getName() + " se quedo sin stock.",
                         new Exception());
+            } else {
+                fullArticle.setQuantity(newQuantity);
+                modifiedArticles.add(products.modify(fullArticle));
             }
-            modifiedArticles.add(products.modify(fullArticle));
         }
         ArticlesResponseDTO response = new ArticlesResponseDTO();
         response.setArticles(modifiedArticles);

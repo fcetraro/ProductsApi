@@ -1,9 +1,8 @@
 package com.ml.ProductsApi.controller;
 
+import com.ml.ProductsApi.dao.IProductDAO;
 import com.ml.ProductsApi.model.ArticleDTO;
-import com.ml.ProductsApi.model.request.BuyedArticlesDTO;
-import com.ml.ProductsApi.model.request.FilterDTO;
-import com.ml.ProductsApi.model.request.QuantityArticleDTO;
+import com.ml.ProductsApi.model.request.BoughtArticlesDTO;
 import com.ml.ProductsApi.model.response.ArticlesResponseDTO;
 import com.ml.ProductsApi.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +14,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1")
 public class ProductController {
-    @Autowired
     private IProductService service;
+    @Autowired
+    public ProductController(IProductService service) {
+        this.service = service;
+    }
     @GetMapping("/articles")
     public List<ArticleDTO> getArticles(@RequestParam(required = false) Map<String, String> queryMap,
                                         @RequestParam(required = false) String order){
@@ -27,7 +29,7 @@ public class ProductController {
         return service.getArticlesById(id);
     }
     @PutMapping("/articles/buy")
-    public ArticlesResponseDTO buyArticles(@RequestBody BuyedArticlesDTO articlesBuyed) {
+    public ArticlesResponseDTO buyArticles(@RequestBody BoughtArticlesDTO articlesBuyed) {
         return service.buyArticles(articlesBuyed.getArticles());
     }
 }

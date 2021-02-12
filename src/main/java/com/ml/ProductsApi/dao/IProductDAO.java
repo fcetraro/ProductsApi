@@ -1,6 +1,7 @@
 package com.ml.ProductsApi.dao;
 
 import com.ml.ProductsApi.model.ArticleDTO;
+import com.ml.ProductsApi.model.read.ArticleFromJsonDTO;
 import com.ml.ProductsApi.model.request.FilterDTO;
 
 import java.util.List;
