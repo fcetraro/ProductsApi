@@ -1,7 +1,6 @@
 package com.ml.ProductsApi.filters;
 
 import com.ml.ProductsApi.model.ArticleDTO;
-import com.ml.ProductsApi.model.request.FilterDTO;
 
 import java.util.*;
 import java.util.function.Predicate;

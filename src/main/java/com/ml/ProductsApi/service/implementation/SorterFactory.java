@@ -7,6 +7,10 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author ${fcetraro}
+ */
+
 public class SorterFactory {
     public static ISorter getInstance(){return new HeapSortSorterImplementation();}
     public static Map<String, Comparator<ArticleDTO>> getComparables(){
