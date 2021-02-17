@@ -4,10 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ml.ProductsApi.dao.IProductDAO;
 import com.ml.ProductsApi.exception.concreteExceptions.ProductNotFoundException;
-import com.ml.ProductsApi.filters.ArticlePredicate;
 import com.ml.ProductsApi.model.ArticleDTO;
 import com.ml.ProductsApi.model.read.ArticleFromJsonDTO;
-import com.ml.ProductsApi.model.request.FilterDTO;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 
@@ -16,10 +14,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Predicate;
-
-import static java.util.stream.Collectors.toList;
 
 @Repository
 public class ProductsRepositoryJson implements IProductDAO {
@@ -57,11 +51,9 @@ public class ProductsRepositoryJson implements IProductDAO {
         }
     }
     @Override
-    public List<ArticleDTO> getArticles(Map<String, String> filter) {
+    public List<ArticleDTO> getArticles() {
         loadInitialArticles();
-        ArticlePredicate filters = new ArticlePredicate();
-        Predicate<ArticleDTO> predicate = filters.getCombinedPredicateFromDTO(filter);
-        return articles.stream().filter(predicate).collect(toList());
+        return articles;
     }
 
     @Override

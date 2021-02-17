@@ -6,6 +6,10 @@ import com.ml.ProductsApi.service.ISorter;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * @author ${fcetraro}
+ */
+
 public class HeapSortSorterImplementation implements ISorter<ArticleDTO> {
     void heapify(List<ArticleDTO> arr, int n, int i, Comparator c)
     {
